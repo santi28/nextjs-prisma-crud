@@ -18,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-neutral-950`}>
-        <NotesProvider>
-          {children}
-        </NotesProvider>
+        <main className="flex gap-10 mt-10 text-neutral-300 w-full max-w-6xl m-auto">
+          <NotesProvider>
+            {children}
+          </NotesProvider>
+        </main>
       </body>
     </html>
   )

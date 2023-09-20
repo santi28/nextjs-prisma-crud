@@ -16,14 +16,14 @@ function Home() {
   }, [loadNotes]);
 
   return (
-    <main className="flex justify-center gap-10 mt-10">
+    <>
       <div className="flex flex-col w-full max-w-2xl">
         <h1 className="text-2xl font-bold text-neutral-300">Notes</h1>
         <NotesList notes={notes} />
       </div>
       <NoteForm />
       <Toaster position="bottom-right" />
-    </main>
+    </>
   );
 }
 

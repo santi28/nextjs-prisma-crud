@@ -24,7 +24,8 @@ export default function NotePill({ note }: Props) {
   };
 
   return (
-    <div
+    <a
+      href={`/note/${note.id}`}
       key={note.id}
       className="bg-neutral-900 p-4 rounded-lg text-neutral-300 border border-neutral-800 min-h-32">
       <header className="flex justify-between items-start mb-1">
@@ -37,6 +38,6 @@ export default function NotePill({ note }: Props) {
         </button>
       </header>
       <p>{note.content}</p>
-    </div>
+    </a>
   )
 }

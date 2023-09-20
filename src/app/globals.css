@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mantine-1hrzv3f .mantine-Editor-root {
+  @apply bg-neutral-950 text-neutral-300 w-full !important;
+}
+
+.mantine-1hrzv3f .ProseMirror {
+  @apply bg-neutral-950 text-neutral-300 w-full !important;
+}
