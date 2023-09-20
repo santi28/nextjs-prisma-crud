@@ -1,28 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Note } from "@prisma/client";
 
 import NotesList from "@/components/NoteList";
 import NoteForm from "@/components/NoteForm";
-
-async function loadNotes() {
-  const response = await fetch("http://localhost:3000/api/notes");
-  const notes = await response.json();
-  return notes;
-}
+import { NoteContext } from "@/context/NoteContext";
 
 function Home() {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [showNoteForm, setShowNoteForm] = useState<boolean>(false);
+  const { notes, loadNotes } = useContext(NoteContext);
 
   useEffect(() => {
-    loadNotes()
-      .then((notes) => setNotes(notes))
-      .finally(() => setLoading(false));
-  }, []);
+    loadNotes();
+  }, [loadNotes]);
 
   return (
     <main className="flex justify-center gap-10 mt-10">
