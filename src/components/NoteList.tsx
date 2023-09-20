@@ -7,7 +7,7 @@ interface Props {
 
 export default function NotesList({ notes }: Props) {
   return (
-    <div className="gap-4 mt-5 grid grid-cols-3 w-full">
+    <div className="gap-4 mt-5 grid grid-cols-2 w-full">
       { notes.map((note: Note) => (<NotePill note={note} key={note.id} />)) }
     </div>
   );

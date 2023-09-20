@@ -9,9 +9,14 @@ interface Props {
 interface NoteContext {
   notes: Note[]
   loadNotes: () => Promise<void>
+  deleteNote: (noteId: number) => Promise<void>
 }
 
-const NoteContext = createContext<NoteContext>({ notes: [], loadNotes: () => Promise.resolve() });
+const NoteContext = createContext<NoteContext>({ 
+  notes: [], 
+  loadNotes: () => Promise.resolve(), 
+  deleteNote: () => Promise.resolve()
+});
 
 function NotesProvider({ children }: Props) {
   async function loadNotes() {
@@ -20,10 +25,24 @@ function NotesProvider({ children }: Props) {
     setNotes(notes);
   }
 
+  async function deleteNote(noteId: number) {
+    try {
+      const deletedNoteResponse = await fetch(`http://localhost:3000/api/notes/${noteId}`, { method: "DELETE" });
+
+      if (!deletedNoteResponse.ok) throw new Error("Something went wrong");
+      const deletedNote = await deletedNoteResponse.json() as Note;
+
+      const updatedNotes = notes.filter((note) => note.id !== deletedNote.id);
+      setNotes(updatedNotes);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const [notes, setNotes] = useState<Note[]>([]);
 
   return (
-    <NoteContext.Provider value={{ notes, loadNotes }}>
+    <NoteContext.Provider value={{ notes, loadNotes, deleteNote }}>
       {children}
     </NoteContext.Provider>
   )
